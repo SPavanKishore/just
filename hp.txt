@@ -1,9 +1,22 @@
-function addPartNumberOptions(partNumbers) {
-        var partNumberSelect = $('#partNumber');
-        partNumberSelect.empty();
-        partNumberSelect.append('<option value="" selected>--select--</option>');
+this.getJsonObj = function () {
+            var retObj = {};
+            var NonSummartProps = $.grep(this.Inputs, function (v, i) {
+                return v.IsSummaryProperty == false;
+            });
+            $.each(NonSummartProps, function (i, v) {
+                var inputValue = v.val() == 'N/A' ? 0 : v.val();
+                retObj[v.Name] = inputValue;
+            });
 
-        partNumbers.forEach(function (partNumber) {
-            partNumberSelect.append('<option value="' + partNumber + '">' + partNumber + '</option>');
-        });
-    }
+
+            var clutchModelTypeValue = $('#clutchModelType').val();
+            var ClutchTCPValue = $('#clutchModelType').val() === 'HPTO14' ? $('#dropdownTCPtype').val() : $('#tcpType').val();
+            var ClutchPartNumberValue = $('#clutchModelType').val() === 'HPTO14' || $('#clutchModelType').val() === 'HPTO15' ? $('#partNumber').val() : $('#partNumberT').val();
+
+            retObj['ClutchModelType'] = clutchModelTypeValue;
+            retObj['ClutchTCP'] = ClutchTCPValue;
+            retObj['ClutchPartNumber'] = ClutchPartNumberValue;
+
+
+            return retObj;
+        }
