@@ -1,0 +1,42 @@
+public ActionResult GetClutchData(string ProjectId, string Revision)
+        {
+            var data = new
+            {
+                ClutchModel = string.Empty,
+                ClutchPartNumber = string.Empty,
+                ClutchTCP = string.Empty
+            };
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(_DBConnection))
+                {
+                    string sqlQuery = "SELECT [ClutchPartNumber],[ClutchModelType],[ClutchTCP] FROM [HPTO].[HPTO_Analysis_Data] WHERE ProjectId = '" + ProjectId + "' and Revision = '" + Revision + "'";
+                    SqlCommand cmd = new SqlCommand(sqlQuery, con);
+                    con.Open();
+                    SqlDataReader rdr = cmd.ExecuteReader();
+
+                    if (rdr.Read())
+                    {
+                        string clutchModel = rdr["ClutchModelType"].ToString();
+                        string clutchPartNumber = rdr["ClutchPartNumber"].ToString();
+                        string clutchTCP = rdr["ClutchTCP"].ToString();
+
+
+                        data = new
+                        {
+                            ClutchModel = clutchModel,
+                            ClutchPartNumber = clutchPartNumber,
+                            ClutchTCP = clutchTCP
+                        };
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception)
+            {
+            }
+
+            // Return the JSON object
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
