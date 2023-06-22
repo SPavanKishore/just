@@ -1,62 +1,9 @@
-$('#dropdownTCP').hide();
-                $('#dropPN').hide();
-                $('#textPN').hide();
-                if (ctrl.val() == "HPTO12W") {
-                    $('#pumpDriveBar').show();
-                    $('#clutchModelType').val(ctrl.val());
-                    $('#textTCP').show();
-                    $('#tcpType').val('Single Row 8x1, Sealed');
-                    $('#textPN').show();
-                    $('#partNumberT').val("FC191441-H14SA-HSS");
-                }
-                else if (ctrl.val() == "HPTO13") {
-                    $('#pumpDriveBar').show();
-                    $('#clutchModelType').val(ctrl.val());
-                    $('#textTCP').show();
-                    $('#tcpType').val("Single Row 8x1, Sealed");
-                    $('#textPN').show();
-                    $('#partNumberT').val("FC191441-H14SA-HSS");
-                }
-                else if (ctrl.val() == "HPTO14") {
-                    $('#pumpDriveBar').show();
-                    $('#clutchModelType').val(ctrl.val());
-                    $('#textTCP').hide();
-                    $('#dropdownTCP').show();
-                    var dropDown14 = '<select class="form-control" name="partNumber" id="partNumber">' +
-                        '<option value ="" selected>--select--</option> ' +
-                        '<option value ="FC191435-H14SA-JSS">FC191435-H14SA-JSS</option> ' +
-                        '<option value ="FC191436-H14SA-CSS">FC191436-H14SA-CSS</option>' +
-                        '<option value ="FC191445-H18SA-JSS">FC191445-H18SA-JSS</option> ' +
-                        '<option value ="FC191446-H18SA-CSS">FC191446-H18SA-CSS</option>' +
-                        '<option value ="FC191402-H14SD-JSS">FC191402-H14SD-JSS</option>' +
-                        '<option value ="FC35230-H14SA-MDS">FC35230-H14SA-MDS</option> ' +
-                        '<option value ="FC35243-H14SA-NDS">FC35243-H14SA-NDS</option>' +
-                        '<option value ="FC191429-H18SA-MDS">FC191429-H18SA-MDS</option> ' +
-                        '</select> ';
-                    $('#dropPN').html(dropDown14);
-                    $('#dropPN').show();
-                }
-                else if (ctrl.val() == "HPTO15") {
-                    $('#pumpDriveBar').show();
-                    $('#clutchModelType').val(ctrl.val());
-                    $('#textTCP').show();
-                    $('#tcpType').val("Double Row 10x1, Sealed");
-                    var dropDown = '<select class="form-control" name="partNumber" id="partNumber">' +
-                        '<option value ="" selected>--select--</option> ' +
-                        '<option value ="FC35231-H14SA-PDO">FC35231-H14SA-PDO</option> ' +
-                        '<option value ="FC191430-H18SA-PDS">FC191430-H18SA-PDS</option>' +
-                        '</select>';
-                    $('#dropPN').html(dropDown);
-                    $('#dropPN').show();
-                }
-                else if (ctrl.val() == "HPTO21") {
-                    $('#pumpDriveBar').show();
-                    $('#clutchModelType').val(ctrl.val());
-                    $('#textTCP').show();
-                    $('#tcpType').val("Double Row 10x1, Sealed");
-                    $('#textPN').show();
-                    $('#partNumberT').val("FC191430-H18SA-PDS");
-                }
-                else {
-                    $('#pumpDriveBar').hide();
-                }
+function addPartNumberOptions(partNumbers) {
+        var partNumberSelect = $('#partNumber');
+        partNumberSelect.empty();
+        partNumberSelect.append('<option value="" selected>--select--</option>');
+
+        partNumbers.forEach(function (partNumber) {
+            partNumberSelect.append('<option value="' + partNumber + '">' + partNumber + '</option>');
+        });
+    }
