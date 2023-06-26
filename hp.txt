@@ -1,15 +1,31 @@
-var columnStyle = {};
+if ($('#cmodel').val() === 'HPTO12W' || $('#cmodel').val() === 'HPTO13' || $('#cmodel').val() === 'HPTO14' || $('#cmodel').val() === 'HPTO15' || $('#cmodel').val() === 'HPTO21') {
 
-        if (typeof options.NoAdditionalColumnStyles != 'undefined' && options.NoAdditionalColumnStyles === false) {
-            columnStyle = {
-                0: { cellWidth: 75 },
-                1: { cellWidth: 77 },
-                2: { cellWidth: 77 }
-            };
+            PDfAddHeaderTableRight(doc, "Coupling Information", doc.previousAutoTable.finalY);
+
+            columns = [
+                { title: "Clutch Model", dataKey: "cModel" },
+                { title: "TCP Coupling Type", dataKey: "tcp" },
+                { title: "Part Number", dataKey: "pn" }
+            ];
+            data = [
+                {
+                    "cModel": AnalysisInfo.ClutchModelType,
+                    "tcp": AnalysisInfo.ClutchTCP,
+                    "pn": AnalysisInfo.ClutchPartNumber
+                }]
+
+            PdfAddInfoTable(doc, {
+                columns,
+                data,
+                margin: {
+                    right: 20,
+                    left: 260
+                },
+                StartY: 269,
+                headStyles: {
+                    fillColor: [255, 130, 1],
+                },
+                NoAdditionalColumnStyles: false
+            });
         }
-        else {
-            columnStyle = {
-                0: { cellWidth: 183 },
-                1: { cellWidth: 46 },
-            };
-        }
+        else { }
