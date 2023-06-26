@@ -1,24 +1,15 @@
-function PDfAddHeaderTableRight(doc, HeaderText, StartY) {
-        var columns = [{ title: HeaderText },];
-        var data = [];
+var columnStyle = {};
 
-        doc.autoTable(columns, data, {
-            startY: StartY+11,
-            tableWidth: 230,
-            styles: {
-                overflow: 'linebreak',
-                cellWidth: '100',
-                halign: 'center',
-                tableLineColor: 0,
-                lineColor: 0,
-                lineWidth: 0.01,
-            },
-            margin: {
-                right: 20,
-                left:260
-            },
-            headStyles: {
-                fillColor: [255, 130, 1],
-            }
-        });
-    }
+        if (typeof options.NoAdditionalColumnStyles != 'undefined' && options.NoAdditionalColumnStyles === false) {
+            columnStyle = {
+                0: { cellWidth: 75 },
+                1: { cellWidth: 77 },
+                2: { cellWidth: 77 }
+            };
+        }
+        else {
+            columnStyle = {
+                0: { cellWidth: 183 },
+                1: { cellWidth: 46 },
+            };
+        }
